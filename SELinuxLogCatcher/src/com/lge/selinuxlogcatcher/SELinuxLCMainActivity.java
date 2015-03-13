@@ -29,7 +29,7 @@ public class SELinuxLCMainActivity extends Activity {
 		
 		SELinuxLogItemMgr logItemMgr = new SELinuxLogItemMgr();
 		
-		SELinuxLogItem logItem = new SELinuxLogItem("avc denied", "scontext:sensor");
+		/*SELinuxLogItem logItem = new SELinuxLogItem("avc denied", "scontext:sensor");
 		logItemMgr.addList(logItem);
 		logItem = new SELinuxLogItem("avc denied", "scontext:atd");
 		logItemMgr.addList(logItem);
@@ -67,7 +67,7 @@ public class SELinuxLCMainActivity extends Activity {
 		logItemMgr.addList(logItem);
 		logItem = new SELinuxLogItem("avc denied", "scontext:platform_app");
 		logItemMgr.addList(logItem);
-				
+		*/	
 		
 		LogCustomView logCustomView = new LogCustomView(logItemMgr.getLogItemList());
 		logListView.setAdapter(logCustomView);
