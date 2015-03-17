@@ -26,14 +26,20 @@ public final class R {
     }
     public static final class id {
         public static final int LinearLayout1=0x7f080000;
-        public static final int action_settings=0x7f080004;
+        public static final int action_settings=0x7f080009;
+        public static final int imageView1=0x7f080002;
+        public static final int imageView2=0x7f080005;
+        public static final int imageView3=0x7f080004;
         public static final int logListView=0x7f080001;
-        public static final int logTextView=0x7f080003;
-        public static final int tagTextView=0x7f080002;
+        public static final int logTextView=0x7f080008;
+        public static final int tagTextView=0x7f080007;
+        public static final int textView1=0x7f080003;
+        public static final int textView2=0x7f080006;
     }
     public static final class layout {
         public static final int activity_selinux_lcmain=0x7f030000;
-        public static final int log_item_row=0x7f030001;
+        public static final int log_detail=0x7f030001;
+        public static final int log_item_row=0x7f030002;
     }
     public static final class menu {
         public static final int selinux_lcmain=0x7f070000;
