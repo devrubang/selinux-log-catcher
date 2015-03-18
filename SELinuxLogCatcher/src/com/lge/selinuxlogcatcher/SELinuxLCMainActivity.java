@@ -1,5 +1,7 @@
 package com.lge.selinuxlogcatcher;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -28,6 +30,8 @@ public class SELinuxLCMainActivity extends Activity {
 		
 		SELinuxLogItemMgr logItemMgr = new SELinuxLogItemMgr();
 		
+		sendCommand(logItemMgr);
+		/*
 		SELinuxLogItem logItem = new SELinuxLogItem("avc denied", "scontext:sensor");
 		logItemMgr.addList(logItem);
 		logItem = new SELinuxLogItem("avc denied", "scontext:atd");
@@ -66,7 +70,7 @@ public class SELinuxLCMainActivity extends Activity {
 		logItemMgr.addList(logItem);
 		logItem = new SELinuxLogItem("avc denied", "scontext:platform_app");
 		logItemMgr.addList(logItem);
-			
+		*/
 		
 		LogCustomAdapter logCustomAdapter = new LogCustomAdapter(logItemMgr.getLogItemList());
 		logListView.setAdapter(logCustomAdapter);
@@ -180,5 +184,39 @@ public class SELinuxLCMainActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void sendCommand(SELinuxLogItemMgr logItemMgr) {
+		String command = String.format("cat /data/logger/kernel.log");
+
+
+		try {
+			Process process = Runtime.getRuntime().exec(command);
+			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			StringBuilder result = new StringBuilder();
+
+			int start = 0;
+			int end = 0;
+			
+			String currentLine = null;
+			String title = null;
+			String log = null;
+
+			while ((currentLine = reader.readLine()) != null) {
+				if (currentLine != null) {
+					if(currentLine.indexOf("avc:") != -1)
+					{
+						start = currentLine.indexOf("/");
+						end = currentLine.indexOf("]");
+						title = currentLine.substring(start + 2, end);
+						log = currentLine.substring(end + 2);
+						SELinuxLogItem logItem = new SELinuxLogItem(title, log);
+						logItemMgr.addList(logItem);
+					}
+				}
+			}
+		} catch (Exception e) {		
+			Toast.makeText(this, "IOException", Toast.LENGTH_SHORT).show();
+		}
 	}
 }
