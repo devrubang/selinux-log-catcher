@@ -114,13 +114,32 @@ public class SELinuxLCMainActivity extends Activity {
 				long id) {
 			// TODO Auto-generated method stub
 			LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-			View logView = inflater.inflate(R.layout.log_detail, null);			
+			View logView = inflater.inflate(R.layout.log_detail, null);
+			
+			String scontext = null;
+			String tcontext = null;
+			String syscall = null;
+			String SELinuxLog = null;
+			TextView scontextTextView = (TextView) logView.findViewById(R.id.scontexttextView1);
+			TextView syscallTextView = (TextView) logView.findViewById(R.id.syscalltextView3);
+			TextView tcontextTextView = (TextView) logView.findViewById(R.id.tcontexttextView2);
+			
 			AlertDialog.Builder builder = new AlertDialog.Builder(context);
 			builder.setView(logView);
 			AlertDialog alertDialog = builder.create();
 			alertDialog.show();
 			
-			Toast.makeText(context, "test", Toast.LENGTH_SHORT).show();
+			SELinuxLogItem logItem = (SELinuxLogItem) parent.getAdapter().getItem(position);
+			scontext = logItem.getScontext();
+			tcontext = logItem.getTcontext();
+			syscall = logItem.getSyscall();
+			
+			SELinuxLog = logItem.getLog();
+			System.out.println("SELinux Log : " + SELinuxLog);
+			scontextTextView.setText(scontext);
+			tcontextTextView.setText(tcontext);
+			syscallTextView.setText(syscall);
+			//Toast.makeText(context, "test", Toast.LENGTH_SHORT).show();
 			
 		}
 		
@@ -156,9 +175,11 @@ public class SELinuxLCMainActivity extends Activity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+			
 			View logView = inflater.inflate(R.layout.log_item_row, null);
 			TextView tagTextView = (TextView) logView.findViewById(R.id.tagTextView);
 			TextView logTextView = (TextView) logView.findViewById(R.id.logTextView);
+			
 			SELinuxLogItem logItem = logItemList.get(position);
 			tagTextView.setText(logItem.getTag());
 			logTextView.setText(logItem.getLog());
