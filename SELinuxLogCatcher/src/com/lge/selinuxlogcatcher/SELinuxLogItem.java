@@ -71,8 +71,6 @@ public class SELinuxLogItem {
 			end = log.indexOf(SUFFIX_CONTEXT, start);
 		}
 
-
-
 		result = log.substring(start, end);
 
 		return result;

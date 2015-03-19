@@ -34,10 +34,10 @@ public final class R {
         public static final int imageView3=0x7f080004;
         public static final int logListView=0x7f080001;
         public static final int logTextView=0x7f080009;
+        public static final int scontexttextView1=0x7f080003;
+        public static final int syscalltextView3=0x7f080005;
         public static final int tagTextView=0x7f080008;
-        public static final int textView1=0x7f080003;
-        public static final int textView2=0x7f080007;
-        public static final int textView3=0x7f080005;
+        public static final int tcontexttextView2=0x7f080007;
     }
     public static final class layout {
         public static final int activity_selinux_lcmain=0x7f030000;
